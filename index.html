@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>artDialog弹窗扩展 - 图片阅览</title>
+
+	<link rel="stylesheet"  href="lib/ui-dialog.css">
+</head>
+<body style="text-align: center">
+	<h3>点击图片测试效果</h3>
+	<img src="lib/test.jpg" height="100" id="test" >
+
+	<script src="lib/jquery-1.11.1.min.js"></script>
+	<script src="lib/dialog-min.js"></script>
+	<script src="dialog.extend.js"></script>
+
+
+	<script>
+
+	$('#test').on('click',function(){
+		dialog.img({
+			'img': $(this),
+			'rotate':true,
+			'maxWidth':500,
+			'maxHeight':400
+		})
+	})
+
+	</script>
+</body>
+</html>

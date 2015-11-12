@@ -1,0 +1,14 @@
+{
+	"name": "artDialog弹窗扩展",
+
+	"version": "0.0.1",
+
+	"description": "图片阅览",
+
+	"main": "dialog.extend.js",
+
+	"dependencies": {
+		"jquery": "1.8+",
+		"artDialog": "6.0.5"
+	}
+}
