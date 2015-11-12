@@ -15,15 +15,17 @@ artDialog网页对话框组件功能扩展
 在使用前，你需要引入jQuery和artDialog
 
 
-	<!-- bootstrap-datetimepicker -->
-	<link rel="stylesheet" href="css/ui-dialog.css">
-
+	<!-- dialog的样式文件 -->
+	<link rel="stylesheet" href="lib/ui-dialog.css">
 
 	<!-- jQuery -->
-	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="lib/jquery-1.11.1.min.js"></script>
+
+	<!-- artDialog网页对话框组件 -->
+	<script src="lib/dialog-min.js"></script>
 	
 	<!-- artDialog.extend -->
-	<script src="js/dialog.extend.js"></script>
+	<script src="dialog.extend.js"></script>
 
 <br>
 
@@ -31,7 +33,7 @@ artDialog网页对话框组件功能扩展
 
 <b>消息提示</b>
 
-	dialog.msg('消息提示',5)
+	dialog.msg( content, time )
 
 	/**
 	 * [弹窗消息提示，带显示时间]
@@ -41,7 +43,7 @@ artDialog网页对话框组件功能扩展
 
 <b>气泡提示</b>
 
-	dialog.tipmsg(content, element, time)
+	dialog.tipmsg( content, element, time )
 
 	/**
 	 * [气泡提示，带显示时间]
@@ -52,7 +54,7 @@ artDialog网页对话框组件功能扩展
 	
 <b>确认对话框</b>
 	
-	dialog.recheck(okfn,nofn,mask)
+	dialog.recheck( okfn, nofn, mask )
 
 	/**
 	 * [确认对话框]
@@ -64,7 +66,7 @@ artDialog网页对话框组件功能扩展
 
 <b>带旋转功能的图片阅览</b>
 
-	dialog.img(options)
+	dialog.img( options )
 
 	/**
 	 * [弹出阅览大图]
