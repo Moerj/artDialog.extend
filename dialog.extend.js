@@ -165,6 +165,7 @@
                         callback: function () {
                             multiple --;
                             doRotate(img,multiple);
+                            this.reset();
                             return false;
                         }
                     },
@@ -173,6 +174,7 @@
                         callback: function () {
                             multiple ++;
                             doRotate(img,multiple);
+                            this.reset();
                             return false;
                         }
                     }
