@@ -85,14 +85,15 @@
             'maxWidth':false,
             'maxHeight':false,
             'quickClose':false,
+            'title':'',
             'clone':true //默认以克隆方式阅览大图
         };
         var opts = $.extend({}, defaults , options||{});
         var img = opts.img;
 
         if (!img) {
-            console.error('需要查看的大图未定义')
-            return
+            console.error('需要查看的大图未定义');
+            return;
         }
 
         if (opts.clone) {
@@ -101,10 +102,10 @@
 
         // 如果配置了宽高，则对图片进行强制等比例拉伸
         if (opts.width) {
-            img.width(opts.width)
+            img.width(opts.width);
         }
         else if (opts.height) {
-            img.height(opts.height)
+            img.height(opts.height);
         }
 
         // 设置最大宽高
@@ -117,7 +118,7 @@
             var multiple=0;
             var maxlen,w,h;//maxlen:图片最长的一边
 
-            function doRotate(img,multiple){//旋转图片
+            var doRotate = function(img,multiple){//旋转图片
                 img.css({
                     transform: "rotate(" + (multiple*90) + "deg)",
                     marginTop:h/-2,
@@ -127,7 +128,8 @@
                     width: maxlen,
                     height: maxlen
                 });
-            }
+                this.reset();//重置弹出层位置
+            };
             
             dialog({
                 content:img,
@@ -136,7 +138,7 @@
                 cancel:true,
                 onremove: function () { //对话框销毁的时也销毁大图
                     var bigImg = this.original.content[0];
-                    bigImg.remove()
+                    bigImg.remove();
                 },
                 cancelValue:"关闭",
                 onshow: function () {//打开时，让大图绝对定位居中
@@ -164,8 +166,7 @@
                         value: '左转',
                         callback: function () {
                             multiple --;
-                            doRotate(img,multiple);
-                            this.reset();
+                            doRotate(img,multiple).bind(this);
                             return false;
                         }
                     },
@@ -173,13 +174,12 @@
                         value: '右转',
                         callback: function () {
                             multiple ++;
-                            doRotate(img,multiple);
-                            this.reset();
+                            doRotate(img,multiple).bind(this);
                             return false;
                         }
                     }
                 ]
-            }).showModal()
+            }).showModal();
 
         }else{  //default
             img.css({
@@ -192,9 +192,9 @@
                 quickClose: opts.quickClose,
                 onremove: function () { //对话框销毁的时也销毁大图
                     var bigImg = this.original.content[0];
-                    bigImg.remove()
-                },
-            }).showModal()
+                    bigImg.remove();
+                }
+            }).showModal();
         }
     };
     
