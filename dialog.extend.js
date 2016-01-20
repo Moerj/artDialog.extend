@@ -119,6 +119,7 @@
             var maxlen,w,h;//maxlen:图片最长的一边
 
             var doRotate = function(img,multiple){//旋转图片
+                document.documentElement.scrollTop = document.body.scrollTop =0;
                 img.css({
                     transform: "rotate(" + (multiple*90) + "deg)",
                     marginTop:h/-2,
@@ -129,6 +130,10 @@
                     height: maxlen
                 });
                 d.reset();//重置弹出层位置
+
+                // 如果图片过大出现滚动条，将滚动条至于最下和最右，方便继续点击旋转按钮
+                document.documentElement.scrollTop = document.body.scrollTop = $(document).height();
+                document.documentElement.scrollLeft = document.body.scrollLeft = $(document).width();
             };
             
             var d = dialog({
@@ -197,4 +202,5 @@
             }).showModal();
         }
     };
+    
     
