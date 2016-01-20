@@ -128,10 +128,10 @@
                     width: maxlen,
                     height: maxlen
                 });
-                this.reset();//重置弹出层位置
+                d.reset();//重置弹出层位置
             };
             
-            dialog({
+            var d = dialog({
                 content:img,
                 title: opts.title,
                 quickClose: opts.quickClose,
@@ -166,7 +166,7 @@
                         value: '左转',
                         callback: function () {
                             multiple --;
-                            doRotate(img,multiple).bind(this);
+                            doRotate(img,multiple);
                             return false;
                         }
                     },
@@ -174,7 +174,7 @@
                         value: '右转',
                         callback: function () {
                             multiple ++;
-                            doRotate(img,multiple).bind(this);
+                            doRotate(img,multiple);
                             return false;
                         }
                     }
