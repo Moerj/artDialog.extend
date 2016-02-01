@@ -5,43 +5,70 @@
      * [弹窗消息提示，带显示时间]
      * @param  {[String]}   content [消息内容]
      * @param  {[number]}   time    [持续时间]
+     * @param  {[String]}   ico     [内容区域的图标]
+     * @return {[obj]}              [dialog弹出窗实例对象]
      */
-    dialog.msg = function(content,time){
-        var d=window.top.dialog({
+    dialog.msg = function(content, time) {
+
+        // 开启弹出层
+        var d = window.top.dialog({
             quickClose: true,
-            title: '提示',
             content: content
         }).show();
-        if (time>0 || time===undefined) {
-            setTimeout(function () {
+
+        // 设置自动关闭时间，默认2秒后关闭，传入0则不关闭
+        if (time === undefined) time = 2000;
+        if (time>0) {
+            setTimeout(function() {
                 d.close().remove();
-            }, 2000);
+            }, time);
         }
+        return d;
     };
+
+    // 基于dialog.msg的成功对话框
+    dialog.ok = function (content, time){
+        var d = dialog.msg(content, time)
+        $(d.node).find('.ui-dialog').css({
+            backgroundColor: 'rgb(239, 249, 240)',
+            border: '#AECCAF solid 1px'
+        });
+    }
+    // 基于dialog.msg的失败对话框
+    dialog.error = function (content, time){
+        var d = dialog.msg(content, time)
+        $(d.node).find('.ui-dialog').css({
+            backgroundColor: 'rgb(255, 243, 243)',
+            border: '#d9534f solid 1px'
+        });
+    }
 
     /**
      * [气泡提示，带显示时间]
      * @param  {[String]}               content [消息内容]
      * @param  {[String or element]}    element [DOM元素或ID]
      * @param  {[number]}               time    [持续时间]
+     * @return {[obj]}                          [dialog弹出窗实例对象]
      */
-    dialog.tipmsg = function(content,element,time){
-        var d=dialog({
+    dialog.tipmsg = function(content, element, time) {
+        var d = dialog({
             quickClose: true,
             align: 'top',
             content: content
         });
-        if (element===undefined || element==="number") {
+        if (element === undefined || element === "number") {
             d.show();
-        }else{
-            element=$(element)[0];
+        } else {
+            element = $(element)[0];
             d.show(element);
         }
-        if (time>0 || time===undefined) {
-            setTimeout(function () {
+        if (time === undefined) time = 2000;
+        if (time>0) {
+            setTimeout(function() {
                 d.close().remove();
-            }, 2000);
+            }, time);
         }
+        return d;
     };
 
     /**
@@ -49,6 +76,7 @@
      * @param  {[fn]}       okfn [传入确认后执行的函数]
      * @param  {[fn]}       nofn [传入取消后执行的函数]
      * @param  {[blooean]}  mask [是否以蒙层方式打开]
+     * @return {[obj]}      [dialog弹出窗实例对象]
      */
     dialog.recheck = function (okfn,nofn,mask){
         if ( okfn === undefined || typeof okfn != "function" ) {
@@ -70,6 +98,8 @@
             d.show();
         else
             d.showModal();
+
+        return d;
     };
 
     /**
